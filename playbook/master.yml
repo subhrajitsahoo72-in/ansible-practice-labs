@@ -1,0 +1,9 @@
+---
+ - name: Master Role playbook
+   hosts: all
+   become: true
+
+   roles:
+     - pkgs
+     - user
+     - webserver
