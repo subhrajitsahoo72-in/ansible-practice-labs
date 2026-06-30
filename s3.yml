@@ -1,0 +1,15 @@
+---
+ - name: s3 collection demo
+   hosts: local
+   gather_facts: false
+
+   collections:
+     - amazon.aws
+
+   tasks:
+     - name: create s3 bucket
+       amazon.aws.s3_bucket:
+         name: ansible-unique-bucket112
+         state: present
+         region: ap-south-1
+
