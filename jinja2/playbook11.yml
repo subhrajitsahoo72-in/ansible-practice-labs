@@ -1,0 +1,29 @@
+---
+ - name: Deploy nginx config using jinja
+   hosts: all
+   become: true
+   vars:
+     nginx_port: 80
+     server_name: xyz.com
+     web_root: /user/share/nginx/html
+
+   tasks:
+     - name: Install nginx
+       yum:
+         name: nginx
+         state: present
+
+
+     - name: copy nginx config eith templet
+       template:
+         src: nginx.conf.j2
+         dest: /etc/nginx/nginx.conf
+       notify: restart nginx
+
+
+   handlers:
+     - name: restart nginx
+       service:
+         name: nginx
+         state: restarted
+
